@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boston House Prediction</title>
+  <style>
+    /* Global styles */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(186, 242, 242);
+  }
+  
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Left side styles */
+  
+  .left-side {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  img {
+    width: 300px;
+  }
+  
+  /* Right side styles */
+  
+  .right-side {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  label {
+    width: 100px;
+  }
+  
+  input,
+  select {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    ;
+  }
+  
+  button {
+    width: 100px;
+    padding: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Error styles */
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-side">
+      <h1>Boston House Prediction</h1>
+      <img src="https://www.shutterstock.com/image-photo/back-bay-boston-skyline-on-600nw-145605907.jpg" alt="Boston skyline">
+    </div>
+    <div class="right-side">
+      <form action="{{ url_for('predict_datapoint') }}" method="POST">
+        <div class="item">
+          <label class="form-label">CRIM</label>
+          <input class="form-control" type="number" name="CRIM" placeholder="Enter the crime rate in town" min="0" max="100">
+        </div>
+        <div class="item">
+          <label class="form-label">ZN </label>
+          <input class="form-control" type="number" name="ZN" placeholder=" Ënter the ZN value" min="0" max="100">
+        </div>
+        <div class="item">
+          <label class="form-label">INDUS </label>
+          <input class="form-control" type="number" name="INDUS" placeholder="Ënter the proportion of non retail business acres per town" min="0" max="30">
+        </div>
+        <div class="item">
+          <label class="form-label">CHAS</label>
+          <select class="form-control" name="CHAS" placeholder="Enter the CHAS" required>
+            <option class="placeholder" selected disabled value="">Enter the CHAS</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+          </select>
+        </div>
+        <div class="item">
+          <label class="form-label">NOX</label>
+          <input class="form-control" type="number" name="NOX" placeholder="Enter the nitric acid proportion (ppm)" min="0" max="1">
+        </div>
+        <div class="item">
+          <label class="form-label">RM</label>
+          <input class="form-control" type="number" name="RM" placeholder="Enter the no of rooms per dwelling " min="0" max="10">
+        </div>
+        <div class="item">
+          <label class="form-label">AGE</label>
+          <input class="form-control" type="number" name="AGE" placeholder="Enter the proportion of owner occupied units built prior to 1940" min="0" max="100">
+        </div>
+        <div class="item">
+          <label class="form-label">DIS</label>
+          <input class="form-control" type="number" name="DIS" placeholder="Enter the weighted distance to 5 Boston employment centres" min="0" max="15">
+        </div>
+        <div class="item">
+          <label class="form-label">RAD</label>
+          <input class="form-control" type="number" name="RAD" placeholder="Enter the index of accessibility to radial highways" min="1" max="25">
+        </div>
+        <div class="item">
+          <label class="form-label">TAX</label>
+          <input class="form-control" type="number" name="TAX" placeholder="Enter the full value property tax rate per $10,000 " min="100" max="1000">
+        </div>
+        <div class="item">
+          <label class="form-label">PTRATIO</label>
+          <input class="form-control" type="number" name="PTRATIO" placeholder="Enter the pupil teacher ratio by town" min="0" max="30">
+        </div>
+        <div class="item">
+          <label class="form-label">B</label>
+          <input class="form-control" type="number" name="B" placeholder="Enter the value of B" min="0" max="500">
+        </div>
+        <div class="item">
+          <label class="form-label">LSTAT</label>
+          <input class="form-control" type="number" name="LSTAT" placeholder="Enter the percentage lower status of population" min="0" max="100">
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+
+      <h2>The prediction is {{ results }}</h2>
+    </div>
+  </div>
+</body>
+</html>
